@@ -23,10 +23,23 @@ def chat_response():
     try:
         raw_response = chat.send_message(user_input)
         response = raw_response.text
-        return jsonify({"response": response})
+        
+        # Format response for better readability
+        formatted_response = format_response(response)
+        
+        return jsonify({"response": formatted_response})
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-    
+
+def format_response(response):
+    """
+    Function to format the response into clear paragraphs.
+    Adds HTML tags like <p> and <br> for clarity.
+    """
+    paragraphs = response.split('\n')  # Split text into paragraphs if any
+    formatted_response = "".join([f"<p>{para.strip()}</p>" for para in paragraphs if para.strip()])
+    return formatted_response
+
 if __name__ == '__main__':
     app.run(debug=True)

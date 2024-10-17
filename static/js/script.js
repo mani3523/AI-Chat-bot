@@ -27,6 +27,7 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 data: JSON.stringify({ "message": userMessage }),
                 success: function (response) {
+                    // Append the AI's formatted response (which includes HTML)
                     $('#chat-body').append('<div class="chat-message bot">' + response.response + '</div>');
                     $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight); // Scroll to the bottom
                 },
