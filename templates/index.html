@@ -1,35 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-
-</head>
-<body>
-
-    <div class="chat">
-        <div class="chat-header">
-            Manikanta's AI Chatbot
-        </div>
-
-        <div class="chat-body" id="chat-body">
-        </div>
-
-        <div class="chat-footer">
-            <input type="text" class="form-control" id="message-input" placeholder="Type your message here...">
-            <button class="btn btn-3d" id="send-button">Send</button>
-        </div>        
+{% extends 'base.html' %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block content %}
+<div class="chat-container" style="height: 100vh; display: flex; flex-direction: column; text-align: left;">
+  <div class="card" style="flex-grow: 1; overflow-y: auto;">
+    <div class="card-header bg-primary text-white" style="text-align: center; font-family: 'Lucida Console', monospace;">Manikanta's AI Chatbot</div>
+    <div class="card-body messages-box">
+      <ul class="list-unstyled messages-list">
+        <li class="message received">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+              Hi, I am your AI Chatbot, you can ask me anything.
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+  <form class="message-form" method="POST" style="position: fixed; bottom: 0; left: 0; right: 0; background-color: white; padding: 10px;">
+    <div class="input-group">
+      <input type="text" class="form-control message-input" placeholder="Type your message here..." />
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-success btn-send">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
